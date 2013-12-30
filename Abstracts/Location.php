@@ -7,6 +7,10 @@ abstract class Location
 {
 
     protected $loc;
+
+    /**
+     * @var \DateTime $lastmod
+     */
     protected $lastmod;
     protected $changefreq;
     protected $priority;
@@ -30,13 +34,13 @@ abstract class Location
     /**
      * @param mixed $lastmod
      */
-    public function setLastmod($lastmod)
+    public function setLastmod(\DateTime $lastmod)
     {
         $this->lastmod = $lastmod;
     }
 
     /**
-     * @return mixed
+     * @return \DateTime|null
      */
     public function getLastmod()
     {
@@ -74,6 +78,4 @@ abstract class Location
     {
         return $this->priority;
     }
-
-    public abstract function getId();
 }

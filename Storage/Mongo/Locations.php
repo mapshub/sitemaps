@@ -13,12 +13,12 @@ class Locations extends \Sitemaps\Abstracts\Locations
 
     public function add($loc)
     {
-        // TODO: Implement add() method.
+        return $this->storage->addLocation($loc);
     }
 
     public function count()
     {
-        return 0;
+        return $this->storage->count();
     }
 
     public function create()
@@ -28,6 +28,11 @@ class Locations extends \Sitemaps\Abstracts\Locations
 
     public function clear()
     {
-        return true;
+        return $this->storage->clear();
     }
-} 
+
+    public function each($closure)
+    {
+        $this->storage->each($closure);
+    }
+}

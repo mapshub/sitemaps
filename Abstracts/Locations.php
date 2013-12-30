@@ -2,7 +2,7 @@
 
 namespace Sitemaps\Abstracts;
 
-abstract class Locations implements \Countable
+abstract class Locations
 {
 
     public abstract function __construct($id);
@@ -12,5 +12,7 @@ abstract class Locations implements \Countable
     public abstract function create();
 
     public abstract function clear();
+
+    public abstract function each($closure);
 
 } 
