@@ -5,26 +5,25 @@ namespace Sitemaps;
 
 class Sitemap extends \Sitemaps\Abstracts\Sitemap
 {
-    private $id;
+    private $driver;
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
+    public function __construct($id)
     {
-        $this->id = $id;
+        $this->driver = new \Sitemaps\Storage\Mongo\Sitemap($id);
     }
 
-    /**
-     * @return mixed
-     */
     public function getId()
     {
-        return $this->id;
+        return $this->driver->getId();
     }
 
-    public function getCollection()
+    public function getLocations()
     {
-        // TODO: Implement getCollection() method.
+        return $this->driver->getLocations();
     }
-} 
+
+    public function clear()
+    {
+        return $this->driver->clear();
+    }
+}

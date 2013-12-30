@@ -6,19 +6,74 @@ namespace Sitemaps\Abstracts;
 abstract class Location
 {
 
-    public abstract function setChangefreq($changefreq);
+    protected $loc;
+    protected $lastmod;
+    protected $changefreq;
+    protected $priority;
 
-    public abstract function getChangefreq();
+    /**
+     * @param mixed $changefreq
+     */
+    public function setChangefreq($changefreq)
+    {
+        $this->changefreq = $changefreq;
+    }
 
-    public abstract function setLastmod($lastmod);
+    /**
+     * @return mixed
+     */
+    public function getChangefreq()
+    {
+        return $this->changefreq;
+    }
 
-    public abstract function getLastmod();
+    /**
+     * @param mixed $lastmod
+     */
+    public function setLastmod($lastmod)
+    {
+        $this->lastmod = $lastmod;
+    }
 
-    public abstract function setLoc($loc);
+    /**
+     * @return mixed
+     */
+    public function getLastmod()
+    {
+        return $this->lastmod;
+    }
 
-    public abstract function getLoc();
+    /**
+     * @param mixed $loc
+     */
+    public function setLoc($loc)
+    {
+        $this->loc = $loc;
+    }
 
-    public abstract function setPriority($priority);
+    /**
+     * @return mixed
+     */
+    public function getLoc()
+    {
+        return $this->loc;
+    }
 
-    public abstract function getPriority();
+    /**
+     * @param mixed $priority
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    public abstract function getId();
 }
