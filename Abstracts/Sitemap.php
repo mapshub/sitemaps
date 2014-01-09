@@ -9,7 +9,15 @@ abstract class Sitemap
 
     public abstract function getId();
 
-    public abstract function getLocations();
+    public abstract function setStorage($storage);
+
+    public abstract function getStorage();
+
+    public abstract function setBuilder($builder);
+
+    public abstract function getBuilder();
+
+    public abstract function addLocation($url, \DateTime $lastmod, $changefreq = "never", $priority = 0.5);
 
     public abstract function clear();
 

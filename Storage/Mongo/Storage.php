@@ -13,9 +13,14 @@ class Storage extends \Sitemaps\Abstracts\Storage
 
     private $collection = null;
 
-    public function __construct($id)
+    public function setId($id)
     {
         $this->id = $id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getConnection()
@@ -51,6 +56,11 @@ class Storage extends \Sitemaps\Abstracts\Storage
     public function addLocation($loc)
     {
         return $this->getCollection()->insert($loc->getArrayCopy());
+    }
+
+    public function createLocation()
+    {
+        return new Location();
     }
 
     public function clear()
