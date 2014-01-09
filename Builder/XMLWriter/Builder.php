@@ -54,8 +54,8 @@ class Builder extends \Sitemaps\Abstracts\Builder
     {
         $this->numDocs++;
         $id = $this->getSitemap()->getId();
-        $indexFile = "{$id}_sitemap_index.xml";
-        $currentFile = "{$id}_sitemap_{$this->numDocs}.xml";
+        $indexFile = "{$id}_sitemapindex.xml";
+        $currentFile = "{$id}_urlset_{$this->numDocs}.xml";
         if (is_null($this->xwIndex)) {
             $this->xwIndex = $this->openDocument('file://' . $this->getOutputDir() . "/" . $indexFile, "sitemapindex");
         }

@@ -95,6 +95,10 @@ class SitemapTest extends \PHPUnit_Framework_TestCase
         $arrayStorage = new \Sitemaps\Storage\ArrayStorage\Storage();
         $sm->setStorage($arrayStorage);
 
+        $builder = new \Sitemaps\Builder\XMLWriter\Builder();
+        $builder->setOutputDir(__DIR__ . "/" . self::test_output_dir);
+        $builder->setBaseUrl("http://example.com/sitemap/");
+
         $sm->clear();
 
         $total = 2000;
@@ -104,10 +108,6 @@ class SitemapTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertEquals($total, $sm->getStorage()->count());
-
-        $builder = new \Sitemaps\Builder\XMLWriter\Builder();
-        $builder->setOutputDir(__DIR__ . "/" . self::test_output_dir);
-        $builder->setBaseUrl("http://example.com/sitemap/");
 
         $sm->setBuilder($builder);
         $sm->getBuilder()->build();
