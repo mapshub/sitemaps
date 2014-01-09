@@ -1,7 +1,9 @@
 Sitemaps
 ========
 
-Генеатор файлов sitemap
+**Генеатор файлов sitemap**
+
+*Пример с хранением временных данных в массиве PHP*
 
     public function testBuilderWithArrayStorage()
     {
@@ -10,26 +12,23 @@ Sitemaps
 
         $arrayStorage = new \Sitemaps\Storage\ArrayStorage\Storage();
         $sm->setStorage($arrayStorage);
-
-        $sm->clear();
-
-        $total = 2000;
+        
+        $total = 2000; 
 
         for ($i = 0; $i < $total; $i++) {
             $sm->addLocation("http://example.com/catalog/pages/{$i}/", new \DateTime("now"));
         }
-
-        $this->assertEquals($total, $sm->getStorage()->count());
-
+        
         $builder = new \Sitemaps\Builder\XMLWriter\Builder();
         $builder->setOutputDir(__DIR__ . "/" . self::test_output_dir);
         $builder->setBaseUrl("http://example.com/sitemap/");
 
         $sm->setBuilder($builder);
         $sm->getBuilder()->build();
-
-        $sm->clear();
     }
+
+
+*Пример с хранением временных данных в MongoDB*
 
     public function testBuilderWithMongoDBStorage()
     {
@@ -46,9 +45,7 @@ Sitemaps
         for ($i = 0; $i < $total; $i++) {
             $sm->addLocation("http://example.com/catalog/pages/{$i}/", new \DateTime("now"));
         }
-
-        $this->assertEquals($total, $sm->getStorage()->count());
-
+        
         $builder = new \Sitemaps\Builder\XMLWriter\Builder();
         $builder->setOutputDir(__DIR__ . "/" . self::test_output_dir);
         $builder->setBaseUrl("http://example.com/sitemap/");
