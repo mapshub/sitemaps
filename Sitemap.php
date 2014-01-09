@@ -50,7 +50,7 @@ class Sitemap extends \Sitemaps\Abstracts\Sitemap
     public function getStorage()
     {
         if (is_null($this->storage)) {
-            $this->setStorage(new \Sitemaps\Storage\Mongo\Storage());
+            $this->setStorage(new \Sitemaps\Storage\ArrayStorage\Storage());
         }
         return $this->storage;
     }

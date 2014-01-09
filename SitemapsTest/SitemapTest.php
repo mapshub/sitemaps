@@ -30,7 +30,7 @@ class SitemapTest extends \PHPUnit_Framework_TestCase
         $site_id = "sitetest";
         $sm = new \Sitemaps\Sitemap($site_id);
         $loc = $sm->getStorage()->createLocation();
-        $loc->setLoc("http://spbdealers.ru");
+        $loc->setLoc("http://example.com");
         $loc->setChangefreqHourly();
         $loc->setPriority(1);
         $loc->setLastmod(new \DateTime("now"));
@@ -46,7 +46,7 @@ class SitemapTest extends \PHPUnit_Framework_TestCase
 
         for ($i = 0; $i < 10; $i++) {
             $loc = $sm->getStorage()->createLocation();
-            $loc->setLoc("http://spbdealers.ru");
+            $loc->setLoc("http://example.com");
             $loc->setChangefreqHourly();
             $loc->setPriority(1);
             $loc->setLastmod(new \DateTime("now"));
@@ -63,23 +63,79 @@ class SitemapTest extends \PHPUnit_Framework_TestCase
         $sm->clear();
     }
 
-    public function testBuilder()
+    public function testBuilderWithDefaultStorage()
     {
-        $site_id = "sitetest";
+        $site_id = "example_default_storage";
         $sm = new \Sitemaps\Sitemap($site_id);
         $sm->clear();
 
-        $total = 120000;
+        $total = 2000;
 
         for ($i = 0; $i < $total; $i++) {
-            $sm->addLocation("http://spbdealers.ru/page/{$i}/116722000-Renault_Logan_1.4_%2875_%D0%BB.%D1%81.%29_MT", new \DateTime("now"));
+            $sm->addLocation("http://example.com/catalog/pages/{$i}/", new \DateTime("now"));
         }
 
         $this->assertEquals($total, $sm->getStorage()->count());
 
         $builder = new \Sitemaps\Builder\XMLWriter\Builder();
         $builder->setOutputDir(__DIR__ . "/" . self::test_output_dir);
-        $builder->setBaseUrl("http://spbdealers.ru/sitemap/");
+        $builder->setBaseUrl("http://example.com/sitemap/");
+
+        $sm->setBuilder($builder);
+        $sm->getBuilder()->build();
+
+        $sm->clear();
+    }
+
+    public function testBuilderWithArrayStorage()
+    {
+        $site_id = "example_array_storage";
+        $sm = new \Sitemaps\Sitemap($site_id);
+
+        $arrayStorage = new \Sitemaps\Storage\ArrayStorage\Storage();
+        $sm->setStorage($arrayStorage);
+
+        $sm->clear();
+
+        $total = 2000;
+
+        for ($i = 0; $i < $total; $i++) {
+            $sm->addLocation("http://example.com/catalog/pages/{$i}/", new \DateTime("now"));
+        }
+
+        $this->assertEquals($total, $sm->getStorage()->count());
+
+        $builder = new \Sitemaps\Builder\XMLWriter\Builder();
+        $builder->setOutputDir(__DIR__ . "/" . self::test_output_dir);
+        $builder->setBaseUrl("http://example.com/sitemap/");
+
+        $sm->setBuilder($builder);
+        $sm->getBuilder()->build();
+
+        $sm->clear();
+    }
+
+    public function testBuilderWithMongoDBStorage()
+    {
+        $site_id = "example_mongo_storage";
+        $sm = new \Sitemaps\Sitemap($site_id);
+
+        $mongoStorage = new \Sitemaps\Storage\Mongo\Storage();
+        $sm->setStorage($mongoStorage);
+
+        $sm->clear();
+
+        $total = 2000;
+
+        for ($i = 0; $i < $total; $i++) {
+            $sm->addLocation("http://example.com/catalog/pages/{$i}/", new \DateTime("now"));
+        }
+
+        $this->assertEquals($total, $sm->getStorage()->count());
+
+        $builder = new \Sitemaps\Builder\XMLWriter\Builder();
+        $builder->setOutputDir(__DIR__ . "/" . self::test_output_dir);
+        $builder->setBaseUrl("http://example.com/sitemap/");
 
         $sm->setBuilder($builder);
         $sm->getBuilder()->build();
