@@ -1,7 +1,7 @@
 {
     "name": "sitemaps/sitemap",
     "description": "Library that provides generating of sitemap files used by yandex, google etc",
-    "keywords": ["sitemap", "site map"],
+    "keywords": ["sitemap", "site map", "yandex", "google"],
     "homepage": "http://github.com/mapshub/sitemaps",
     "type": "library",
     "license": "MIT",
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Sitemaps": ""
+            "Sitemaps": "src"
         }
     }
 }
