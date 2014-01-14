@@ -5,7 +5,7 @@ namespace Sitemaps\Builder\XMLWriter;
 class Builder extends \Sitemaps\Abstracts\Builder
 {
     const MAX_URL_COUNT = 50000;
-    const MAX_FILE_SIZE = 10000;
+    const MAX_FILE_SIZE = 95000000;
 
     private $sitemap;
     private $outputDir;
